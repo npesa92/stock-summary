@@ -80,29 +80,29 @@ export interface ISummaryDetail {
 }
 
 export interface IStock {
+    defaultKeyStatistics: IKeyStatistics;
+    earnings: IEarnings;
     price: IPrice;
     quoteType: IQuoteType;
     summaryDetail: ISummaryDetail;
-    defaultKeyStatistics: IKeyStatistics;
-    earnings: IEarnings;
 }
 
 export interface AppStateStockName {
+    currency: string;
+    market: string;
     name: string;
     symbol: string;
-    market: string;
-    currency: string;
 }
 
 export interface AppStateStockPrice {
-    price: string;
-    priceChange: string;
-    priceChangePercent: string;
-    priceTime?: number;
     postMarketPrice: string;
     postMarketPriceChange: string;
     postMarketPriceChangePercent: string;
     postMarketTime?: number;
+    price: string;
+    priceChange: string;
+    priceChangePercent: string;
+    priceTime?: number;
 }
 
 export interface AppStateSummaryListRow {
