@@ -50,4 +50,4 @@ export const rootReducer = (state: IAppState = initialAppState, action: Action) 
         default:
             return state;
     }
-}
+};

@@ -16,6 +16,6 @@ function App() {
       <StockPage />
     </Provider>
   );
-}
+};
 
 export default App;

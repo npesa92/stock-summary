@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         loadChart: (symbol: string, period: string) => dispatch(loadChartData(symbol, period)),
     };
-}
+};
 
-const SummaryChart = connect(mapStateToProps, mapDispatchToProps)
+const SummaryChart = connect(mapStateToProps, mapDispatchToProps);
 
 export default SummaryChart(SummaryChartComponent);

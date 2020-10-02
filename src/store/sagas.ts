@@ -47,15 +47,15 @@ const getPriceData = (stock: IStock): AppStateStockPrice => {
         postMarketPriceChange,
         postMarketPriceChangePercent,
         postMarketTime,
-    }
-}
+    };
+};
 
 const getSummaryItem = (label: string, value: string) => {
     return {
         label,
         value: value ?? '--',
     };
-}
+};
 
 const getSummaryListData = (stock: IStock): AppStateSummaryListRow[] => {
     const { summaryDetail, defaultKeyStatistics, earnings } = stock;
@@ -98,7 +98,7 @@ const getSummaryListData = (stock: IStock): AppStateSummaryListRow[] => {
             right: getSummaryItem('1y Target Est', '--'),
         },
     ];
-}
+};
 
 export function* fetchStocks(action: any) {
     yield put(setStockResultsLoading(true));
@@ -139,7 +139,7 @@ export function* loadChart(action: any) {
     const { data } = yield YahooFinanceService.loadChartData(action.symbol, action.period, intervalMap[action.period]);
     console.log(data);
     yield put(setChartData(data));
-}
+};
 
 export function* rootSaga() {
     yield all([

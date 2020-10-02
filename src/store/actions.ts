@@ -37,11 +37,11 @@ export const setCurrentStock = (stock: AppStateStock) => {
 
 export const loadChartData = (symbol: string, period: string) => {
     return { type: ACTION_TYPE.LOAD_CHART_DATA, symbol, period };
-}
+};
 
 export const setChartData = (data: ChartData) => {
     return { type: ACTION_TYPE.SET_CHART_DATA, data };
-}
+};
 
 export type Action = 
     { type: ACTION_TYPE.SET_STOCK_RESULTS_LOADING, isLoading: boolean } |

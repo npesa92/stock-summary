@@ -35,7 +35,6 @@ const StockPage = () => {
             <Container>
                 <StockSummary />
             </Container>
-
         </Root>
     );
 };

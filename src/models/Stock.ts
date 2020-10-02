@@ -106,7 +106,7 @@ export interface AppStateStockPrice {
 }
 
 export interface AppStateSummaryListRow {
-    left: SummaryListItem,
+    left: SummaryListItem;
     right: SummaryListItem;
 }
 
