@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { AppStateStockPrice } from './../models';
 
 const SummaryPriceContainer = styled.div`
     display: flex;
@@ -29,10 +30,25 @@ const PreCloseChange = styled.span`
     color: green;
     font-weight: bold;
     margin-bottom: 8px;
+
+    &.positive {
+        color: green;
+    }
+    &.negative {
+        color: red;
+    }
 `;
 
 const PostClosePrice = styled.span`
     font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-right: 6px;
+`;
+
+const PostCloseChange = styled.span`
+    font-size: 20px;
+    color: rgba(0,0,0,0.44);
     font-weight: bold;
     margin-bottom: 8px;
 `;
@@ -42,19 +58,44 @@ const PriceTime = styled.div`
     color: rgba(0,0,0,0.44);
 `;
 
-const SummaryPrice = () => {
+interface SummaryPriceProps {
+    price: AppStateStockPrice;
+}
+
+const SummaryPrice: React.FC<SummaryPriceProps> = ({ price }) => {
+
+    const getFormattedTime = (time?: number) => {
+        if (time) {
+            const date = new Date(time * 1000);
+            const hours = date.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const h = hours % 12 ?? 12;
+            const m = date.getMinutes();
+            return `${h}:${m < 10 ? `0${m}` : m} ${ampm}`;
+        } else {
+            return '--';
+        }
+    };
+
     return (
         <SummaryPriceContainer>
             <SinglePriceContainer>
                 <BeforeCloseRow>
-                    <PreClosePrice>113.80</PreClosePrice>
-                    <PreCloseChange>+0.11 (+0.10%)</PreCloseChange>
+                    <PreClosePrice>{price.price}</PreClosePrice>
+                    <PreCloseChange
+                        className={price.priceChange.indexOf('-') > -1 ? 'negative' : 'positive'}
+                    >
+                        {price.priceChange} ({price.priceChangePercent})
+                    </PreCloseChange>
                 </BeforeCloseRow>
-                <PriceTime>At close: 4:00PM EDT</PriceTime>
+                <PriceTime>At close: {getFormattedTime(price.priceTime)}</PriceTime>
             </SinglePriceContainer>
             <SinglePriceContainer>
-                <PostClosePrice>113.80 0.00 (0.00%)</PostClosePrice>
-                <PriceTime>After hours 4:17PM EDT</PriceTime>
+                <BeforeCloseRow>
+                    <PostClosePrice>{price.postMarketPrice}</PostClosePrice>
+                    <PostCloseChange>{price.postMarketPriceChange} ({price.postMarketPriceChangePercent})</PostCloseChange>
+                </BeforeCloseRow>
+                <PriceTime>After hours: {getFormattedTime(price.postMarketTime)}</PriceTime>
             </SinglePriceContainer>
         </SummaryPriceContainer>
     );

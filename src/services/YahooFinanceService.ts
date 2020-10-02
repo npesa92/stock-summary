@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosPromise } from 'axios';
+import { IStock } from './../models';
 
 class YahooFinanceService {
 
@@ -25,12 +26,26 @@ class YahooFinanceService {
         });
     }
 
-    public fetchStockSumamry(symbol: string) {
+    public fetchStockSumamry(symbol: string): AxiosPromise<IStock> {
         const params = new URLSearchParams();
         params.append('region', 'US');
         params.append('symbol', symbol);
-        return axios({
+        return axios.request<IStock>({
             url: `${this.baseUrl}/stock/v2/get-summary`,
+            method: 'GET',
+            headers: this.headers,
+            params: params,
+        });
+    }
+
+    public loadChartData(symbol: string, period: string, interval: string) {
+        const params = new URLSearchParams();
+        params.append('region', 'US');
+        params.append('interval', interval);
+        params.append('symbol', symbol);
+        params.append('range', period);
+        return axios.request<IStock>({
+            url: `${this.baseUrl}/stock/v2/get-chart`,
             method: 'GET',
             headers: this.headers,
             params: params,

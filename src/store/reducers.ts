@@ -2,10 +2,12 @@ import {
     Action,
     ACTION_TYPE,
 } from './actions';
+import { AppStateStock, ChartData } from './../models';
 
 export interface IAppState {
     stocks: any[];
-    currentStock?: any;
+    currentStock?: AppStateStock;
+    stockChart?: ChartData;
     query: string;
     isLoadingResults: boolean;
     isLoadingSummary: boolean;
@@ -39,6 +41,11 @@ export const rootReducer = (state: IAppState = initialAppState, action: Action) 
             return {
                 ...state,
                 currentStock: action.stock,
+            };
+        case ACTION_TYPE.SET_CHART_DATA:
+            return {
+                ...state,
+                stockChart: action.data,
             };
         default:
             return state;

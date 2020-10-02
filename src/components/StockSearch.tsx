@@ -8,6 +8,16 @@ import { requestStocks, fetchStockSummary, setStockSearchResults } from './../st
 const SearchWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
+    transition: 250ms ease;
+
+    &.open {
+        height: 300px;
+    }
+
+    &.closed {
+        height: 30px;
+    }
 `;
 
 const SearchInput = styled.input`
@@ -33,6 +43,13 @@ const ListItem = styled.div`
     }
 `;
 
+const ListWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 100%;
+`;
+
 interface NameSymbolPair {
     symbol: string;
     name: string;
@@ -47,6 +64,7 @@ const StockSearchComponent: React.FC<ConnectedProps<typeof StockSearch>> = ({
 }) => {
 
     const [stockQuotes, setStockQuotes] = useState<any[]>([]);
+    const [focused, setFocusState] = useState(false);
 
     useEffect(() => {
         const symbolNamePair = stocks.map((stock) => {
@@ -73,12 +91,13 @@ const StockSearchComponent: React.FC<ConnectedProps<typeof StockSearch>> = ({
     };
 
     return (
-        <SearchWrapper>
-            <SearchInput placeholder={'Search Stocks'} onChange={onChange} />
+        <SearchWrapper className={focused ? 'open' : 'closed'}>
+            <SearchInput onFocus={() => setFocusState(true)} onBlur={() => setFocusState(false)} placeholder={'Search Stocks'} onChange={onChange} />
             {
                 isLoadingResults &&
                 <p>Loading results...</p>
             }
+            <ListWrapper>
             {
                 (!isLoadingResults && stockQuotes.length > 0) &&
                 stockQuotes.map((stock: any) => {
@@ -92,6 +111,7 @@ const StockSearchComponent: React.FC<ConnectedProps<typeof StockSearch>> = ({
                     );
                 })
             }
+            </ListWrapper>
         </SearchWrapper>
     );
 };

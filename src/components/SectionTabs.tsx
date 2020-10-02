@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const TabContainer = styled.div`
     display: flex;
     width: 100%;
+    margin-bottom: 24px;
 `;
 
 const Tab = styled.div`
@@ -18,13 +19,13 @@ const Tab = styled.div`
         max-width: 100%;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-weight: bold;
     }
     
     &.selected {
         border-bottom: 3px solid blue;
         span {
             color: black;
-            font-weight: bold;
         }
     }
 `;
@@ -52,6 +53,7 @@ const SectionTabs = () => {
             tabs.map((tab: string, index: number) => {
                 return (
                     <Tab
+                        key={tab}
                         className={selectedTab === index ? 'selected' : 'unselected'}
                         onClick={() => setSelectedTab(index)}
                     >
