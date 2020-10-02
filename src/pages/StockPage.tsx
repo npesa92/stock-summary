@@ -8,7 +8,7 @@ const Root = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 72px;
+    padding-top: 48px;
 `;
 
 const Container = styled.div`

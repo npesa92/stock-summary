@@ -20,13 +20,13 @@ const BeforeCloseRow = styled.div`
 `;
 
 const PreClosePrice = styled.span`
-    font-size: 24px;
+    font-size: 42px;
     font-weight: bold;
-    margin: 0 6px 8px 0;
+    margin: 0 12px 8px 0;
 `;
 
 const PreCloseChange = styled.span`
-    font-size: 20px;
+    font-size: 28px;
     color: green;
     font-weight: bold;
     margin-bottom: 8px;
@@ -40,14 +40,14 @@ const PreCloseChange = styled.span`
 `;
 
 const PostClosePrice = styled.span`
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 8px;
-    margin-right: 6px;
+    margin-right: 12px;
 `;
 
 const PostCloseChange = styled.span`
-    font-size: 20px;
+    font-size: 28px;
     color: rgba(0,0,0,0.44);
     font-weight: bold;
     margin-bottom: 8px;
